@@ -2,6 +2,7 @@
 
 package com.example.android.justjava;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -49,62 +50,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displayQuantity(int quantity) {
-            }
-    /**
 
-     * This method is called when the plus button is clicked.
-
-     */
-
-    public void increment(View view) {
-
-        if (quantity == 100) {
-
-// Show an error message as a toast
-
-            Toast.makeText(this, "You cannot have more than 100 coffees", Toast.LENGTH_SHORT).show();
-
-// Exit this method early because there's nothing left to do
-
-            return;
-
-        }
-
-        quantity = quantity + 1;
-
-        displayQuantity(quantity);
 
     }
-
-
-
     /**
-
-     * This method is called when the minus button is clicked.
-
+     * This method increments the quantity
      */
-
+    public void increment(View view){
+        if(quantity <= 100){
+            quantity = quantity + 1;
+        }else{
+            Context context = getApplicationContext();
+            CharSequence text = "You can order up to 100 coffees only.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+        displayQuantity(quantity);
+    }
+    /**
+     * This method decreases the quantity
+     */
     public void decrement(View view) {
-
-        if (quantity == 1) {
-
-// Show an error message as a toast
-
-            Toast.makeText(this, "You cannot have less than 1 coffee", Toast.LENGTH_SHORT).show();
-
-// Exit this method early because there's nothing left to do
-
-            return;
-
+        if(quantity >= 1){
+            quantity = quantity - 1;
+        }else{
+            Context context = getApplicationContext();
+            CharSequence text = "You cannot have less than 1 coffee.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
-
-        quantity = quantity - 1;
-
         displayQuantity(quantity);
-
     }
-
-}
 
     /**
 
